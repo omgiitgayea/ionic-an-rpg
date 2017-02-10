@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>So you want to be a hero...</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            Create a new character
+        </ion-card-header>
+        <ion-card-content>
+            <!--<ion-list>-->
+                <!---->
+            <!--</ion-list>-->
+
+            <ion-list radio-group>
+                <ion-item>
+                    <ion-label floating>Character Name</ion-label>
+                    <ion-input [(ngModel)]="name" type="text" name="name"></ion-input>
+                </ion-item>
+                <ion-list-header>
+                    Gender
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>Female</ion-label>
+                    <ion-radio checked="true" value="female"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Male</ion-label>
+                    <ion-radio value="male"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Asexual</ion-label>
+                    <ion-radio value="none"></ion-radio>
+                </ion-item>
+            </ion-list>
+
+            <button ion-button (click)="showConfirm()">Create Character</button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
