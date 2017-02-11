@@ -3,11 +3,11 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Character Detail</ion-title>
+        <ion-title>{{pageTitle}}</ion-title>
     </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-    <p>Here is the spot where you find out all the info stuff and whatever. Massive array coming...</p>
+    <p *ngIf="!character.title">Here is the spot where you find out all the info stuff and whatever. Massive array coming...</p>
+    <p *ngIf="character.title">{{character.title}} is an awesome character</p>
 </ion-content>

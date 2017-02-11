@@ -11,4 +11,9 @@ export class CharacterService {
         this.charArray = [{name: "Joe"}, {name: "Sal"}, {name: "Murr"}, {name: "Q"}];
     }
 
+    addNewChar(newChar: any): void {
+        console.log(newChar.name);
+        this.charArray.push(newChar);
+    }
+
 }

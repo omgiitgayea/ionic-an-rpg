@@ -18,28 +18,29 @@
                 <!---->
             <!--</ion-list>-->
 
-            <ion-list radio-group>
+            <ion-list>
                 <ion-item>
                     <ion-label floating>Character Name</ion-label>
                     <ion-input [(ngModel)]="name" type="text" name="name"></ion-input>
                 </ion-item>
-                <ion-list-header>
-                    Gender
-                </ion-list-header>
+
                 <ion-item>
-                    <ion-label>Female</ion-label>
-                    <ion-radio checked="true" value="female"></ion-radio>
+                    <ion-label>Gender</ion-label>
+                    <ion-select [(ngModel)]="gender">
+                        <ion-option value="female" checked="true">Female</ion-option>
+                        <ion-option value="male">Male</ion-option>
+                        <ion-option value="none">Asexual</ion-option>
+                    </ion-select>
                 </ion-item>
+
                 <ion-item>
-                    <ion-label>Male</ion-label>
-                    <ion-radio value="male"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Asexual</ion-label>
-                    <ion-radio value="none"></ion-radio>
+                    <ion-label>Class</ion-label>
+                    <ion-select [(ngModel)]="myClass">
+                        <ion-option *ngFor="let aClass of classes" [value]="aClass">{{aClass.name}}</ion-option>
+                    </ion-select>
                 </ion-item>
             </ion-list>
-
+            <p *ngIf="myClass">{{myClass.name}} is {{myClass.description}}</p>
             <button ion-button (click)="showConfirm()">Create Character</button>
         </ion-card-content>
     </ion-card>

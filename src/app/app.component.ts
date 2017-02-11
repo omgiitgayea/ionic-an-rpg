@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 import {CharacterDetailPage} from "../pages/character-detail/character-detail";
@@ -8,7 +8,7 @@ import {AddCharacterPage} from "../pages/add-character/add-character";
 @Component({
     templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit{
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any = CharacterDetailPage;
@@ -19,6 +19,10 @@ export class MyApp {
         this.initializeApp();
 
         // used for an example of ngFor and navigation
+
+    }
+
+    ngOnInit(): void {
         this.pages = [];
         for (let i: number = 0; i < this.charService.charArray.length; i++) {
             this.pages.push({title: this.charService.charArray[i].name, component: CharacterDetailPage})
@@ -38,6 +42,6 @@ export class MyApp {
     openPage(event, page) {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(page.component);
+        this.nav.setRoot(page.component, page);
     }
 }
