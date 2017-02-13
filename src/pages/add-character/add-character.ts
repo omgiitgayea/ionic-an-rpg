@@ -25,7 +25,6 @@ export class AddCharacterPage implements OnInit{
         this.myClass = null;
     }
     ionViewDidLoad() {
-        console.log('ionViewDidLoad AddCharacterPage');
     }
 
     showConfirm() {

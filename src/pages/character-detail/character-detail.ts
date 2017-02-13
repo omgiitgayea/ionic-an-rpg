@@ -21,7 +21,6 @@ export class CharacterDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.charService.charArray.length);
   }
 
 }

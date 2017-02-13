@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Hey, it's a front door to an RPG</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <button ion-button round (click)="loginToGoogle()" *ngIf="!loggedIn">
+        Login with Google&nbsp;
+        <ion-icon name="logo-google"></ion-icon>
+    </button>
+    <button ion-button round (click)="logoutOfGoogle()" *ngIf="loggedIn">
+        Sign out of Google&nbsp;
+        <ion-icon name="logo-google"></ion-icon>
+    </button>
+</ion-content>
