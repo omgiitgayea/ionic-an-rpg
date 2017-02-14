@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 import {Subscription} from "rxjs";
@@ -12,7 +12,7 @@ import {FirebaseListObservable} from "angularfire2";
 @Component({
     templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit {
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any = HomePage;
@@ -25,14 +25,25 @@ export class MyApp {
         this.initializeApp();
         this.loggedInSubscription = this.charService.amLoggedIn$.subscribe(
             updateArray => {
+                console.log("Okay, I got the data somewhere...");
                 this.loggedIn = updateArray.authStatus;
                 this.charArray = updateArray.array;
+                console.log(this.loggedIn);
             }
         )
     }
 
+    ngOnInit(): void {
+        console.log("Maybe I run here...")
+    }
     ionViewDidLoad() {
-
+        console.log("I ran, but did I?");
+        this.loggedInSubscription = this.charService.amLoggedIn$.subscribe(
+            updateArray => {
+                this.loggedIn = updateArray.authStatus;
+                this.charArray = updateArray.array;
+            }
+        )
     }
 
     initializeApp() {

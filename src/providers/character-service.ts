@@ -21,14 +21,13 @@ export class CharacterService {
     amLoggedIn$ = this.amLoggedIn.asObservable();
 
     updateCharArray(): void {
-        this.amLoggedIn.next(this.users);
+        this.amLoggedIn.next({authStatus: this.authenticated, array: this.users});
     }
 
     constructor(public http: Http, private auth$: AngularFireAuth, private af: AngularFire) {
-        this.authState = auth$.getAuth();
-        auth$.subscribe(state => {
+        this.af.auth.subscribe(state => {
             this.authState = state;
-            if(this.authenticated) {
+            if (this.authenticated) {
                 this.users = af.database.list('users/' + this.authState.uid);
                 this.amLoggedIn.next({authStatus: this.authenticated, array: this.users});
             }
@@ -65,8 +64,11 @@ export class CharacterService {
 
     addNewChar(newChar: any): void {
         if (this.authState) {
-            this.users.push(newChar);
-            this.updateCharArray()
+            this.users.push(newChar)
+                .then(() => {
+                    // this.users = this.af.database.list('users/' + this.authState.uid);
+                    this.updateCharArray()
+                });
         }
 
         // this.charArray.push(newChar);
