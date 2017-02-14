@@ -35,7 +35,7 @@ export class AddCharacterPage implements OnInit{
                 {
                     text: "Yes",
                     handler: () => {
-                        this.charService.addNewChar({name: this.name});
+                        this.charService.addNewChar({name: this.name, gender: this.gender, charClass: this.myClass});
                         this.name = "";
                         this.gender = "";
                         this.myClass = null;

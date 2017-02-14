@@ -12,8 +12,8 @@ export class CharacterDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public charService: CharacterService) {
       this.character = navParams.data;
-      if (this.character.title) {
-          this.pageTitle = this.character.title + " Information";
+      if (this.character.name) {
+          this.pageTitle = this.character.name + " Information";
       }
       else {
           this.pageTitle = "Character Details"

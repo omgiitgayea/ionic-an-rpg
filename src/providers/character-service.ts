@@ -12,7 +12,7 @@ export class CharacterService {
     // keep as any until I make a character class
     charArray: Array<any>;
     private authState: FirebaseAuthState;
-    items: FirebaseListObservable<any[]>;
+    users: FirebaseListObservable<any[]>;
 
     charArraySubject = new Subject<any>();
     charArraySubject$ = this.charArraySubject.asObservable();
@@ -21,16 +21,20 @@ export class CharacterService {
     amLoggedIn$ = this.amLoggedIn.asObservable();
 
     updateCharArray(): void {
-        this.charArraySubject.next(this.charArray);
+        this.amLoggedIn.next(this.users);
     }
 
     constructor(public http: Http, private auth$: AngularFireAuth, private af: AngularFire) {
         this.authState = auth$.getAuth();
-        this.items = af.database.list('/items');
-        console.log(this.items);
         auth$.subscribe(state => {
             this.authState = state;
-            this.amLoggedIn.next(this.authenticated);
+            if(this.authenticated) {
+                this.users = af.database.list('users/' + this.authState.uid);
+                this.amLoggedIn.next({authStatus: this.authenticated, array: this.users});
+            }
+            else {
+                this.amLoggedIn.next({authStatus: this.authenticated, array: null});
+            }
         });
         this.charArray = [{name: "Joe"}, {name: "Sal"}, {name: "Murr"}, {name: "Q"}];
     }
@@ -60,8 +64,13 @@ export class CharacterService {
     }
 
     addNewChar(newChar: any): void {
-        this.charArray.push(newChar);
-        this.updateCharArray();
+        if (this.authState) {
+            this.users.push(newChar);
+            this.updateCharArray()
+        }
+
+        // this.charArray.push(newChar);
+        // this.updateCharArray();
     }
 
 }

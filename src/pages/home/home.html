@@ -17,4 +17,10 @@
         Sign out of Google&nbsp;
         <ion-icon name="logo-google"></ion-icon>
     </button>
+
+    <ul *ngIf="testArray">
+        <li *ngFor="let char of testArray | async">
+            {{char.name}}
+        </li>
+    </ul>
 </ion-content>

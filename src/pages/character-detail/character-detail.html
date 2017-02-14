@@ -8,6 +8,5 @@
 </ion-header>
 
 <ion-content padding>
-    <p *ngIf="!character.title">Here is the spot where you find out all the info stuff and whatever. Massive array coming...</p>
-    <p *ngIf="character.title">{{character.title}} is an awesome character</p>
+    <p>{{character.name}} is a {{character.gender}} character who is a {{character.charClass.name | lowercase}} which is {{character.charClass.description}}</p>
 </ion-content>

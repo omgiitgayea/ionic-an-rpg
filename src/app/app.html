@@ -6,12 +6,16 @@
     </ion-header>
 
     <ion-content>
-        <ion-list>
-            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage($event, p)">
-                <ion-icon name="add" *ngIf="p.title == 'Add Character'"></ion-icon>
-                {{p.title}}
+        <ion-list *ngIf="loggedIn">
+            <button menuClose ion-item *ngFor="let char of charArray | async" (click)="openPage($event, char)">
+                {{char.name}}
+            </button>
+            <button menuClose ion-item (click)="openAddPage()">
+                <ion-icon name="add"></ion-icon>
+                Add Character
             </button>
         </ion-list>
+        <p *ngIf="!loggedIn">Please sign in</p>
     </ion-content>
 
 </ion-menu>
